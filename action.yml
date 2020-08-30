@@ -9,7 +9,7 @@ inputs:
     description: 'Functions to deploy'
     required: true
 runs:
-  using: "composite"
+  using: 'composite'
   steps: 
     - run: ruby $GITHUB_ACTION_PATH/deploy.rb '${{ inputs.lambda-functions }}'
       shell: bash

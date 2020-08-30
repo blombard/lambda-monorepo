@@ -1,8 +1,8 @@
-# Lambda-monorepo
+# AWS Lambda monorepo
 
 Deploy your AWS Lambda functions based on the files changed in a mono repo with this [Github Action](https://github.com/features/actions).
 
-## Prerequisite
+## Prerequisites
 Set you <b>AWS</b> credentials in the [secrets](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) of your repo: 
 - AWS_ACCESS_KEY_ID
 - AWS_SECRET_ACCESS_KEY
@@ -18,10 +18,42 @@ LambdaFunction2:
   - 'LambdaFunction2/**/*'
 ```
 
-## Usage
+## Example
 
-## Source
+```yml
+on:
+  push:
+    branches:
+      - master
 
-This action is based on : 
+jobs:
+  deploy:
+    name: Deploy to AWS Lambda 
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Configure AWS Credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ${{ secrets.AWS_REGION }}
+
+    - uses: dorny/paths-filter@v2.2.1
+      id: filter
+      with:
+        filters: .github/filters.yml
+
+    - uses: blombard/lambda-monorepo@master
+      with:
+        lambda-functions: '${{ toJson(steps.filter.outputs) }}'
+```
+
+## Sources
+
+This action is based on those Gitub actions : 
 - [configure-aws-credentials](https://github.com/aws-actions/configure-aws-credentials)
 - [paths-filter](https://github.com/dorny/paths-filter)
