@@ -54,6 +54,6 @@ jobs:
 
 ## Sources
 
-This action is based on those Gitub actions : 
+This action is based on those Github actions : 
 - [configure-aws-credentials](https://github.com/aws-actions/configure-aws-credentials)
 - [paths-filter](https://github.com/dorny/paths-filter)
