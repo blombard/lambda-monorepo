@@ -1,6 +1,6 @@
 exports.handler = async () => {
-  console.log('Hello World 2')
+  console.log('Hello World 2');
   return {
-    statusCode: 200
+    statusCode: 200,
   };
 };

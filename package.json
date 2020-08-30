@@ -1,0 +1,25 @@
+{
+  "name": "lambda-monorepo",
+  "version": "0.2.0",
+  "description": "Deploy your AWS Lambda functions based on the files changed in a mono repo",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "ncc build index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blombard/lambda-monorepo.git"
+  },
+  "author": "Baptiste Lombard",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/blombard/lambda-monorepo/issues"
+  },
+  "homepage": "https://github.com/blombard/lambda-monorepo#readme",
+  "dependencies": {
+    "@actions/core": "^1.2.5",
+    "shelljs": "^0.8.4",
+    "yaml": "^1.10.0"
+  }
+}
