@@ -1,0 +1,15 @@
+name: 'AWS Lambda Monorepo Deploy'
+description: 'Deploy AWS Lambda functions in a mono repo'
+author: 'Baptiste Lombard'
+branding:
+  icon: 'cloud'
+  color: 'orange'
+inputs:
+  functions:
+    description: 'Functions to deploy'
+    required: true
+runs:
+  using: "composite"
+  steps: 
+    - run: ruby $GITHUB_ACTION_PATH/deploy.rb '${{ toJson(inputs.functions) }}'
+      shell: bash

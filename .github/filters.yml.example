@@ -1,4 +1,0 @@
-LambdaFunction1:
-  - 'LambdaFunction1/**/*'
-LambdaFunction2:
-  - 'LambdaFunction2/**/*'

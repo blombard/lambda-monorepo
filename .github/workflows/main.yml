@@ -26,5 +26,7 @@ jobs:
       with:
         filters: .github/filters.yml
 
-    - name: deploy
-      run: ruby deploy.rb '${{ toJson(steps.filter.outputs) }}'
+    - uses: blombard/lambda-monorepo@master
+      with:
+        functions: ${{ steps.filter.outputs }}
+
