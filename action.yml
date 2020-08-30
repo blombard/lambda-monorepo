@@ -11,5 +11,5 @@ inputs:
 runs:
   using: "composite"
   steps: 
-    - run: ruby $GITHUB_ACTION_PATH/deploy.rb ${{ inputs.lambda-functions }}
+    - run: ruby $GITHUB_ACTION_PATH/deploy.rb '${{ inputs.lambda-functions }}'
       shell: bash
