@@ -2,6 +2,8 @@ require 'yaml'
 require 'json'
 
 filters = YAML.load_file('./.github/filters.yml')
+p ARGV
+p ARGV[0]
 processes = JSON.parse(ARGV[0])
 
 processes.each do |key, value|
