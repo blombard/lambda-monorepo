@@ -27,5 +27,5 @@ jobs:
         filters: .github/filters.yml
 
     - uses: blombard/lambda-monorepo@master
-      # with:
-      #   functions: ${{ steps.filter.outputs }}
+      with:
+        lambda-functions: '${{ toJson(steps.filter.outputs) }}'

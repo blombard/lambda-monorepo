@@ -5,11 +5,11 @@ branding:
   icon: 'cloud'
   color: 'orange'
 inputs:
-  functions:
+  lambda-functions:
     description: 'Functions to deploy'
     required: true
 runs:
   using: "composite"
   steps: 
-    - run: ruby $GITHUB_ACTION_PATH/deploy.rb '${{ toJson(inputs.functions) }}'
+    - run: ruby $GITHUB_ACTION_PATH/deploy.rb ${{ inputs.lambda-functions }}
       shell: bash
