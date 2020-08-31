@@ -23,7 +23,7 @@ jobs:
       with:
         filters: .github/filters.yml
 
-    - uses: blombard/lambda-monorepo@master
+    - uses: ./
       with:
         lambda-functions: '${{ toJson(steps.filter.outputs) }}'
         zip-params: '*.js *.json node_modules/'

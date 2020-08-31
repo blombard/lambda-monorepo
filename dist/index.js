@@ -380,7 +380,7 @@ try {
   const yml = YAML.parse(file);
 
   for (const [key, value] of Object.entries(functions)) {
-    if (value === 'true') shell.exec(`sh ./deploy.sh ${key} ${yml[key][0].split('*')[0]} ${zipParams} "${alias}" "${layer}"`);
+    if (value === 'true') shell.exec(`sh ./deploy.sh "${key}" "${yml[key][0].split('*')[0]}" "${zipParams}" "${alias}" "${layer}"`);
   }
 } catch (error) {
   core.setFailed(error.message);
