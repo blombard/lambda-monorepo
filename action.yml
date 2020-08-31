@@ -8,6 +8,15 @@ inputs:
   lambda-functions:
     description: 'Functions to deploy'
     required: true
+  zip-params:
+    description: 'Files to zip for uploading to AWS'
+    required: true
+  alias-name:
+    description: 'Pointer to a specific Lambda function version'
+    required: false
+  layer-name:
+    description: 'Additional code and content'
+    required: false
 runs:
   using: 'node12'
   main: 'dist/index.js'

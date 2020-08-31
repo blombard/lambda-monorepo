@@ -50,6 +50,9 @@ jobs:
     - uses: blombard/lambda-monorepo@master
       with:
         lambda-functions: '${{ toJson(steps.filter.outputs) }}'
+        zip-params: '*.js *.json src/ node_modules/'
+        alias-name: 'production'
+        layer-name: 'MyLayer'
 ```
 
 ## Sources
