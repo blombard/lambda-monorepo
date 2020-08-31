@@ -1,3 +1,5 @@
+[![Maintainability](https://api.codeclimate.com/v1/badges/a76164161fd8916e0dd4/maintainability)](https://codeclimate.com/github/blombard/lambda-monorepo/maintainability)
+
 # AWS Lambda monorepo
 
 Deploy your AWS Lambda functions based on the files changed in a mono repo with this [Github Action](https://github.com/features/actions).
@@ -8,7 +10,7 @@ Set you <b>AWS</b> credentials in the [secrets](https://docs.github.com/en/actio
 - AWS_SECRET_ACCESS_KEY
 - AWS_REGION
 
-Create a `filter.yml` file and put it in `.github/worklows` : `.github/worklows/filter.yml`
+Create a `filters.yml` file and put it in `.github/worklows` : `.github/worklows/filters.yml`
 
 The structure of the file should be :
 ```
@@ -54,6 +56,20 @@ jobs:
         alias-name: 'production'
         layer-name: 'MyLayer'
 ```
+
+## Inputs
+#### lambda-functions
+By default should be `'${{ toJson(steps.filter.outputs) }}'`. Update this only if you know what you are doing.
+
+#### zip-params
+Arguments of the command `zip lambda.zip -r $ZIP_PARAMS`. 
+It is the files who will be uploaded to your Lambda function.
+
+#### alias-name
+A Lambda [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) is like a pointer to a specific Lambda function version. This alias will now point to the new version of your function.
+
+#### alias-name
+If your Lambda use a [layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html), it will update you function with the latest version of this layer.
 
 ## Sources
 
