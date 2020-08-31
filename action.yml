@@ -13,9 +13,11 @@ inputs:
     required: true
   alias-name:
     description: 'Pointer to a specific Lambda function version'
+    default: ''
     required: false
   layer-name:
     description: 'Additional code and content'
+    default: ''
     required: false
 runs:
   using: 'node12'
