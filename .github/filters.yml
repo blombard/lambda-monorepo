@@ -1,4 +1,0 @@
-LambdaFunction1:
-  - 'example/LambdaFunction1/**/*'
-LambdaFunction2:
-  - 'example/LambdaFunction2/**/*'
