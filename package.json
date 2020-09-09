@@ -4,6 +4,7 @@
   "description": "Deploy your AWS Lambda functions based on the files changed in a mono repo",
   "main": "dist/index.js",
   "scripts": {
+    "coverage": "jest --coverage",
     "test": "jest --coverage --verbose",
     "build": "ncc build index.js"
   },
