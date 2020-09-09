@@ -4,13 +4,8 @@
   "description": "Deploy your AWS Lambda functions based on the files changed in a mono repo",
   "main": "dist/index.js",
   "scripts": {
-    "lint": "eslint **.js",
-    "test2": "eslint **.js && jest --coverage --verbose",
     "test": "jest",
     "build": "ncc build index.js"
-  },
-  "eslintConfig": {
-    "extends": "airbnb-base"
   },
   "repository": {
     "type": "git",

@@ -1,13 +1,27 @@
-// const core = require('@actions/core');
-// const assert = require('assert');
+const core = require('@actions/core');
 const run = require('./index.js');
+// const shelljs = require('shelljs');
 
-// jest.mock('@actions/core');
+const inputs = {
+  'lambda-functions': '{"LambdaFunction1": "true", "LambdaFunction2": "false"}',
+  'zip-params': '*.js *.json node_modules/',
+  'alias-name': 'prod',
+  'layer-name': '',
+};
 
-// const FAKE_ACCESS_KEY_ID = 'MY-AWS-ACCESS-KEY-ID';
-// const FAKE_SECRET_ACCESS_KEY = 'MY-AWS-SECRET-ACCESS-KEY';
-// const FAKE_REGION = 'fake-region-1';
+function mockGetInput(requestResponse) {
+  return function (name, options) { // eslint-disable-line no-unused-vars
+    return requestResponse[name];
+  };
+}
 
-test('it runs', async () => {
+jest.mock('@actions/core');
+jest.mock('shelljs', () => ({ exec: jest.fn(data => console.log(data)) }));
+
+describe('Run the test suite', () => {
+  core.getInput = jest.fn().mockImplementation(mockGetInput(inputs));
+  test('it runs', async () => {
     await run();
+    expect(core.setFailed).not.toHaveBeenCalled();
+  });
 });
