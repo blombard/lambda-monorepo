@@ -6,8 +6,7 @@ LAYER_NAME=$5
 
 if [ -n "$PATH_NAME" ]; then cd $PATH_NAME; fi
 
-npm install
-npm prune --production
+if [[ $ZIP_PARAMS == *"node_modules"* ]]; then npm install --only=prod; fi
 
 zip lambda.zip -r $ZIP_PARAMS
 
