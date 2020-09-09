@@ -1,4 +1,4 @@
-[![Maintainability](https://api.codeclimate.com/v1/badges/a76164161fd8916e0dd4/maintainability)](https://codeclimate.com/github/blombard/lambda-monorepo/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/a76164161fd8916e0dd4/maintainability)](https://codeclimate.com/github/blombard/lambda-monorepo/maintainability) [![Test Coverage](https://api.codeclimate.com/v1/badges/a76164161fd8916e0dd4/test_coverage)](https://codeclimate.com/github/blombard/lambda-monorepo/test_coverage)
 
 # AWS Lambda monorepo
 
