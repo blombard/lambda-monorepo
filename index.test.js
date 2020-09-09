@@ -1,6 +1,5 @@
 const core = require('@actions/core');
 const run = require('./index.js');
-// const shelljs = require('shelljs');
 
 const inputs = {
   'lambda-functions': '{"LambdaFunction1": "true", "LambdaFunction2": "false"}',
