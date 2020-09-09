@@ -18,9 +18,14 @@ jest.mock('@actions/core');
 jest.mock('shelljs', () => ({ exec: jest.fn(data => console.log(data)) }));
 
 describe('Run the test suite', () => {
-  core.getInput = jest.fn().mockImplementation(mockGetInput(inputs));
-  test('it runs', async () => {
+  test('it should be a success when the params are good', async () => {
+    core.getInput = jest.fn().mockImplementation(mockGetInput(inputs));
     await run();
     expect(core.setFailed).not.toHaveBeenCalled();
+  });
+  test('it should be a failure when no params are given', async () => {
+    core.getInput.mockReset()
+    await run();
+    expect(core.setFailed).toHaveBeenCalled();
   });
 });
