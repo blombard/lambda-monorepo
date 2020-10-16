@@ -5,7 +5,7 @@
 Deploy your AWS Lambda functions based on the files changed in a mono repo with this [Github Action](https://github.com/features/actions).
 
 ## Prerequisites
-Set you <b>AWS</b> credentials in the [secrets](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) of your repo: 
+Set you <b>AWS</b> credentials in the [secrets](https://docs.github.com/en/actions/configuring-and-managing-workflows/creating-and-storing-encrypted-secrets) of your repo:
 - AWS_ACCESS_KEY_ID
 - AWS_SECRET_ACCESS_KEY
 - AWS_REGION
@@ -30,7 +30,7 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to AWS Lambda 
+    name: Deploy to AWS Lambda
     runs-on: ubuntu-latest
 
     steps:
@@ -62,13 +62,13 @@ jobs:
 By default should be `'${{ toJson(steps.filter.outputs) }}'`. Update this only if you know what you are doing.
 
 #### zip-params
-Arguments of the command `zip lambda.zip -r $ZIP_PARAMS`. 
+Arguments of the command `zip lambda.zip -r $ZIP_PARAMS`.
 It is the files who will be uploaded to your Lambda function.
 
 #### alias-name
 A Lambda [alias](https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html) is like a pointer to a specific Lambda function version. This alias will now point to the new version of your function.
 
-#### alias-name
+#### layer-name
 If your Lambda use a [layer](https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html), it will update you function with the latest version of this layer.
 
 ## Build your own deploy function
@@ -92,8 +92,16 @@ aws lambda update-function-configuration --function-name $FUNCTION_NAME --enviro
 rm -f lambda.zip
 ```
 
+### Note
+
+Since the AWS CLI is really verbose, if you need to deploy sensitive data (in your env variables for example) you can use :
+```bash
+cmd > /dev/null
+```
+if you don't want to display stdout but still keep stderr.
+
 ## Sources
 
-This action is based on those Github actions : 
+This action is based on those Github actions :
 - [configure-aws-credentials](https://github.com/aws-actions/configure-aws-credentials)
 - [paths-filter](https://github.com/dorny/paths-filter)
