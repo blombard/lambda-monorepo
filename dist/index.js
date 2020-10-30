@@ -10,6 +10,20 @@ const fs = __webpack_require__(5747);
 const YAML = __webpack_require__(3552);
 const shell = __webpack_require__(3516);
 
+const deployAll = ({ functions, yml, zipParams, alias, layer }) => {
+  let success = true;
+  for (const [key, value] of Object.entries(functions)) {
+    if (value === 'true') {
+      const { code } = shell.exec(`sh ./deploy.sh "${key}" "${yml[key][0].split('*')[0]}" "${zipParams}" "${alias}" "${layer}"`);
+      if (code) {
+        console.error(`Deployment of ${key} failed!`);
+        success = false;
+      }
+    }
+  }
+  return success;
+};
+
 const run = async () => {
   try {
     const lambdaFunctions = core.getInput('lambda-functions');
@@ -20,9 +34,8 @@ const run = async () => {
     const file = fs.readFileSync('./.github/filters.yml', 'utf8');
     const yml = YAML.parse(file);
 
-    for (const [key, value] of Object.entries(functions)) {
-      if (value === 'true') shell.exec(`sh ./deploy.sh "${key}" "${yml[key][0].split('*')[0]}" "${zipParams}" "${alias}" "${layer}"`);
-    }
+    const success = deployAll({ functions, yml, zipParams, alias, layer });
+    if (!success) throw new Error('An error occured. At least one Lambda could not be deployed.');
   } catch (error) {
     core.setFailed(error.message);
   }

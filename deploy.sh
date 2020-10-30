@@ -12,7 +12,8 @@ zip lambda.zip -r $ZIP_PARAMS
 
 if [ -n "$LAYER_NAME" ]; then LAYER=$(aws lambda list-layer-versions --layer-name $LAYER_NAME | jq -r .LayerVersions[0].LayerVersionArn); fi
 
-aws lambda update-function-code --function-name $FUNCTION_NAME --zip-file fileb://lambda.zip
+RETURNED_FUNCTION_NAME=$(aws lambda update-function-code --function-name $FUNCTION_NAME --zip-file fileb://lambda.zip | jq -r .FunctionName)
+
 if [ -n "$LAYER_NAME" ]; then
   aws lambda update-function-configuration --function-name $FUNCTION_NAME --layers $LAYER --environment Variables="{`cat .env | xargs | sed 's/ /,/g'`}"
 else
@@ -32,4 +33,9 @@ fi
 
 rm -f lambda.zip
 
-exit 0
+
+if [[ "$RETURNED_FUNCTION_NAME" == "$FUNCTION_NAME" ]]; then
+  exit 0
+else
+  exit 1
+fi
