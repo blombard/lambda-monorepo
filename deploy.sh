@@ -33,8 +33,7 @@ fi
 
 rm -f lambda.zip
 
-
-if [[ "$RETURNED_FUNCTION_NAME" == "$FUNCTION_NAME" ]]; then
+if [ "$RETURNED_FUNCTION_NAME" = "$FUNCTION_NAME" ]; then
   exit 0
 else
   exit 1
