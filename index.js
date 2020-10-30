@@ -12,10 +12,18 @@ const run = async () => {
     const functions = JSON.parse(lambdaFunctions);
     const file = fs.readFileSync('./.github/filters.yml', 'utf8');
     const yml = YAML.parse(file);
+    let success = true;
 
     for (const [key, value] of Object.entries(functions)) {
-      if (value === 'true') shell.exec(`sh ./deploy.sh "${key}" "${yml[key][0].split('*')[0]}" "${zipParams}" "${alias}" "${layer}"`);
+      if (value === 'true') {
+        const { code } = shell.exec(`sh ./deploy.sh "${key}" "${yml[key][0].split('*')[0]}" "${zipParams}" "${alias}" "${layer}"`);
+        if (code) {
+          console.error(`Deployment of ${key} failed!`);
+          success = false;
+        }
+      }
     }
+    if (!success) throw new Error('An error occured. At least one Lambda could not be deployed.');
   } catch (error) {
     core.setFailed(error.message);
   }

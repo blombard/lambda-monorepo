@@ -90,6 +90,8 @@ aws lambda update-function-code --function-name $FUNCTION_NAME --zip-file fileb:
 aws lambda update-function-configuration --function-name $FUNCTION_NAME --environment Variables="{`cat .env | xargs | sed 's/ /,/g'`}"
 
 rm -f lambda.zip
+
+exit 0
 ```
 
 ### Note
