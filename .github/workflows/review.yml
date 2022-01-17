@@ -1,8 +1,8 @@
 name: Review
 
 on:
-  schedule:
-    - cron: '*/5 * * * 1-5'
+  label:
+    types: [created, edited, deleted]
 
 jobs:
   deploy:
