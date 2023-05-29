@@ -1,6 +1,6 @@
 {
   "name": "lambda-monorepo",
-  "version": "0.2.0",
+  "version": "0.7.0",
   "description": "Deploy your AWS Lambda functions based on the files changed in a mono repo",
   "main": "dist/index.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "yaml": "^2.2.2"
   },
   "devDependencies": {
-    "@vercel/ncc": "^0.24.0",
+    "@vercel/ncc": "^0.36.1",
     "jest": "^26.4.2"
   }
 }
