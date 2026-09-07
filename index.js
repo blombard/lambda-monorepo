@@ -1,13 +1,13 @@
 const core = require('@actions/core');
 const fs = require('fs');
 const YAML = require('yaml');
-const shell = require('shelljs');
+const { spawnSync } = require('child_process');
 
 const deployAll = ({ functions, yml, zipParams, alias, layer }) => {
   let success = true;
   for (const [key, value] of Object.entries(functions)) {
     if (value === 'true') {
-      const { code } = shell.exec(`sh ./deploy.sh "${key}" "${yml[key][0].split('*')[0]}" "${zipParams}" "${alias}" "${layer}"`);
+      const { status: code } = spawnSync('sh', ['./deploy.sh', key, yml[key][0].split('*')[0], zipParams, alias, layer], { stdio: 'inherit' });
       if (code) {
         console.error(`Deployment of ${key} failed!`);
         success = false;
